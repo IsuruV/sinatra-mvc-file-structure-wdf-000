@@ -1,3 +1,4 @@
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -8,4 +9,24 @@ class ApplicationController < Sinatra::Base
   get "/" do
   	erb :index
   end
+
+  get "/dogs" do
+    @dogs = Dog.all
+
+  end
+end
+
+class Dog
+  attr_accessor :name, :breed, :age
+  @@all = []
+  def initialize(name, breed, age)
+    @name = name
+    @breed = breed
+    @age = age
+    @@all << self
+  end
+  def self.all
+    @@all
+  end
+
 end
